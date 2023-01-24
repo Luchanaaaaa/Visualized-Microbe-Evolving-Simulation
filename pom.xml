@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>COMP390</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graphstream</groupId>
+            <artifactId>gs-core</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graphstream</groupId>
+            <artifactId>gs-algo</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graphstream</groupId>
+            <artifactId>gs-ui-swing</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graphstream</groupId>
+            <artifactId>gs-ui-javafx</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.graphstream</groupId>-->
+        <!--            <artifactId>gs-core</artifactId>-->
+        <!--            <version>2.0</version>-->
+        <!--        </dependency>-->
+    </dependencies>
+
+</project>
