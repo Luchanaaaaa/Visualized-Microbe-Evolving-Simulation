@@ -1,4 +1,8 @@
-# Visualized-Microbe-Evolving-Simulation
+# Evolutionary Graph Dynamics
+## User Interface of the Program: 
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/53888060/236586113-4304aa82-618d-4148-a138-1499d4c274f8.png"><img width="520" alt="image" src="https://user-images.githubusercontent.com/53888060/236586140-90f51384-4494-42c1-825c-a8056dd1dedb.png">
+
+
 This is an Visualized Microbe Evolving Simulation  Based on Evolutionary Dynamics.    
 As demonstrated in the implementation section and in the test results, the project successfully 
 implemented all designed models and a fully compliant evolutionary process.
@@ -16,3 +20,133 @@ populations and the evolutionary process, using computers to construct simulatio
 different evolutionary models and their evolutionary processes.
 By using the modelling implemented in this project, the effects of different population 
 structures on the rate of evolution are explored.
+
+
+# 1. Software Design
+
+
+       1. Components of the System
+In the UML diagram above it can be seen visually that the program is divided into the following components to implement the different functions.        
+a. GridGenerator:       
+    Used to implement the Square Lattice structure        
+b. MyGraph: 
+    Graph information class       
+c. MyGraphMain:       
+    The starter component for starting the whole project        
+d. MyGraphUtil: 
+    Set as graph tool     
+e. MyGraphView:     
+    used to generate and set up the user interface      
+f. MyThread:      
+     In this component, the project overrides the thread run method so that different structures have their own threads.     
+g. MyUtil:      
+    Integrates several functional components such as:     
+      -Generation of weights      
+      -Determining whether an input value is a decimal or a number      
+
+
+ <img width="905" alt="image" src="https://user-images.githubusercontent.com/53888060/236585807-e8c23a4b-2444-4b95-a0b4-8c834c2c670a.png">
+
+      2. Data structures and algorithms
+      
+The project plans to use the methods provided in GraphStream to generate and store the nodes, edges, and the structure graph of the population structure graph due to the need to store the node types to better distinguish between mutant and resident.           
+This library uses both Array and HashMap data structure type for the storage of the nodes and edges. It makes it easier to manipulate the graph data, generating nodes and edges by invoking the methods in GraphStream.        
+In order to distinguish between the mutant and resident in the population structure, the project will use the MAP data structure to facilitate the storage of node-type data from the graph.                  
+More generally, the project plans to create Map-type data structures for each node to make it easier to determine the type of individual.       
+
+Design Algorithms:            
+
+a. Weighted Randomization algorithm:   
+Implements random selection after weighting of edges
+b. Square construction algorithm:       
+dynamically constructs graphs based on the number of rows and columns entered by the user
+c. Suppressed graph construction algorithm:       
+dynamically constructs graphs based on the number of individuals entered by the user      
+d. Star graph construction algorithm:     
+dynamically constructs graphs based on the number of individuals entered by the user      
+e. Super Star construction algorithm:       
+dynamically constructs graphs based on the number of individuals entered by the user        
+f. Fixation probability algorithms:       
+Fixed probability algorithms for different population structures based on evolutionary dynamics are implemented in code and displayed on the page       
+g. Actual fixed probability algorithm:        
+Calculates fixation probabilities for the actual evolved results and displays them on the page to compare with the actual fixed probabilities     
+
+
+
+# 2. Implementation:
+## 1. Population Structure Implementation
+### 1. Implement Square Lattice Structure Graph
+<img width="804" alt="image" src="https://user-images.githubusercontent.com/53888060/236586776-18903771-5cf7-4d33-bf5a-daeedfb2d9fd.png">
+<img width="774" alt="image" src="https://user-images.githubusercontent.com/53888060/236586790-ad2372a1-e6b4-47cf-9f4d-eb97c8369cde.png">
+<img width="730" alt="image" src="https://user-images.githubusercontent.com/53888060/236586795-e93329cd-4a03-4ab4-bc40-a35bed95c4d0.png">
+<img width="744" alt="image" src="https://user-images.githubusercontent.com/53888060/236586805-43fea7e4-b703-4f3d-904e-c7ab2858dfc0.png">
+
+
+### 2. Implement Burst Structure Graph
+<img width="819" alt="image" src="https://user-images.githubusercontent.com/53888060/236586893-fc291d3e-b005-4854-b1ae-24638641beb3.png">
+<img width="650" alt="image" src="https://user-images.githubusercontent.com/53888060/236586899-26f2f90e-a427-4689-ab45-fd90e09c4046.png">
+
+### 3. Implement Star Structure Graph
+The star structure is analogous to the Burst structure, but the star structure is not a single-root graph.      
+In contrast, each vertex on the periphery of the star structure has outgoing edges pointing to the central node. In such a case, the central node is no longer the cold node.     
+Natural selection will be amplified, whereas the burst structure will suppress natural selection and amplify the effects of genetic drift.      
+
+<img width="343" alt="image" src="https://user-images.githubusercontent.com/53888060/236586963-6fdbb710-f330-49c1-a0d5-652a183aa606.png">
+The code implementation for the star structure is based on the implementation block for the Burst Structure, as indicated in the figure.
+For constructing the star structure, this code block also uses FOR loop to generate periphery nodes.      
+In each loop, a periphery node is generated and add two directed edges at the same time:      
+One pointing from that node to the central node, and one is pointing from the central node to that node.      
+<img width="637" alt="image" src="https://user-images.githubusercontent.com/53888060/236586984-04ae009e-412d-4401-8181-55c8407c738a.png">
+
+
+### 4. Implement Super Star Structure Graph
+<img width="407" alt="image" src="https://user-images.githubusercontent.com/53888060/236587006-a6c524b0-090d-4244-ae84-28b7745056b6.png">
+It can be seen that the connections between nodes in the superstar structure in evolutionary graph dynamics are complex but not irregular.
+A clever solution is to think of the Super Star structure as a 'blade'. After a single blade has been generated, Using FOR loop repeat to generate the blades. Such complex shapes can be completed in this way.     
+The core of implementing a superstar structure is how to implement a blade. The blade generation is inspired by breadth search, first adding the first layer of cold blue nodes and the edges from the centre point to the cold blue nodes.     
+After generating all the nodes in the first layer, the hot node in the second layer is added, along with edges pointing from the cold node in the first layer to that hot node.     
+Eventually, the edges pointing from the hot node to the centre are added. This approach is made more evident in the code.     
+<img width="734" alt="image" src="https://user-images.githubusercontent.com/53888060/236587032-9f931daa-f428-48e3-a3a9-7a181ea16f6a.png">
+<img width="648" alt="image" src="https://user-images.githubusercontent.com/53888060/236587042-b30f49c9-4fd7-476c-bbeb-843f8b704431.png">
+After the implementation of one blade, the idea of generating the Super Star Structure became apparent: a for loop was added to generate the five blades as shown in the Super Star Structure illustration repeatedly.      
+As the number of points and edges in the superstar structure is relatively dense, this project uses the CSS style setting method provided by GraphStream to adjust the style of the generated structure, making it look more exciting and intuitive.          
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/53888060/236587185-79c6a27d-8bee-4ecf-97e3-400e4ea175e0.png">
+<img width="717" alt="image" src="https://user-images.githubusercontent.com/53888060/236587204-9bae1d33-1a5f-4051-a217-3f7def32371e.png">
+
+
+# 3. Evaluation:        
+In addition to functional testing of the software implementation, the reliability of the models was also an important metric to be achieved in this project.        
+Therefore, after the models were constructed, Model Tests were applied to each model to check the accuracy of the model. This is a bit like black box testing.        
+Research in theoretical biology gives formulas for calculating the Fixation probability of the evolution of the corresponding population structure.     
+For different types of population structure, the relevant studies point to the following probability of their mutants producing a lineage that takes over the entire population.      
+
+<img width="692" alt="image" src="https://user-images.githubusercontent.com/53888060/236586296-0fa991a6-33ab-46d4-8d12-e2e74b60ac9f.png">
+<img width="743" alt="image" src="https://user-images.githubusercontent.com/53888060/236586306-cca701c1-fc6e-4346-8c42-77dc222b7394.png">
+<img width="677" alt="image" src="https://user-images.githubusercontent.com/53888060/236587136-da3effc4-198e-4b62-be7e-21bb22a23cc0.png">
+The final code used to implement the superstar structure is shown in the diagram. Unlike the default use of straight edges and other styles, the structure is displayed as shown in the diagram after the CSS style is applied.     
+![Uploading image.png…]()
+
+# 4. Conclusion:
+1) For the software implementation component:         
+As demonstrated in the implementation section and in the test results, the project successfully implemented all designed models and a fully compliant evolutionary process.       
+For ease of use, the software supports the user to easily modify the values in the user interface and view the data generated by the model evolution process.       
+2) For the experiment component:                
+The implementation of the experiments can be viewed in the “Implementation-Experiment implementation”.      
+The results of the experiments show that different populations have different effects on evolution.       
+The effects of natural selection on evolution are amplified in Square Lattice structures, Star structures and Superstar Structures: dominant mutant is more likely to propagate throughout the population.          
+
+Furthermore, the experimental results show that:      
+
+For the same Population Size and one Mutant with same Mutant Fitness, the effect of these structures in amplifying natural selection is ranked as follows:
+
+***Superstar Structures > Star structures > Square Lattice structures***
+
+Moreover, amazingly, The Burst Structure is suppressing natural selection.            
+Regardless of the fitness of the mutant individuals in the experimental data, the Evolutionary Rate of the population is approximately 1/N:       
+
+Mutation propagates back to the entire population only when the central node is selected. This show that the evolutionary process of Burst Structure is affected by random drift.
+          
+
+
+
+ 
